@@ -1,0 +1,75 @@
+.navbar {
+  background-color: var(--background, #ffffff);
+  color: var(--foreground, #171717);
+  border-bottom: 1px solid #e5e5e5;
+  padding: 0.75rem 1.5rem;
+  font-family: Arial, sans-serif;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.navbar-container {
+  max-width: 1024px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-logo {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  align-items: center;
+}
+
+.navbar-links a {
+  text-decoration: none;
+  color: inherit;
+  font-weight: 500;
+}
+
+.auth-btn {
+  background-color: #4f46e5;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.auth-btn:hover {
+  background-color: #4338ca;
+}
+
+@media (max-width: 600px) {
+  .navbar-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navbar-links {
+    flex-direction: column;
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  .navbar-links li {
+    width: 100%;
+  }
+
+  .navbar-links a,
+  .auth-btn {
+    width: 100%;
+    display: block;
+    text-align: left;
+  }
+}
