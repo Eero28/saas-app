@@ -1,4 +1,4 @@
-name: Next.js-saas-app CI
+name: Next.js-saas-app
 
 on:
   push:
