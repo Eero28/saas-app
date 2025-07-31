@@ -1,13 +1,14 @@
 "use client";
 import { useState } from "react";
 import "../styling/navbar.css";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
 
 export default function Navbar() {
     const { user, signOut } = useAuth()
 
     const router = useRouter()
+    const pathname = usePathname();
 
     const handleLogout = async () => {
         try {
@@ -26,9 +27,11 @@ export default function Navbar() {
             <div className="navbar-container">
                 <span className="navbar-logo">Welcome, {user.email}</span>
                 <ul className="navbar-links">
-                    <li>
-                        <a href="/dashboard">Dashboard</a>
-                    </li>
+                    {pathname !== "/profile" && (
+                        <li>
+                            <a href="/profile">Profile</a>
+                        </li>
+                    )}
                     <li>
                         {user ? (
                             <button onClick={handleLogout} className="auth-btn">

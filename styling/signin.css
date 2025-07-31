@@ -9,7 +9,6 @@ body,
 html {
   height: 100%;
   font-family: Arial, sans-serif;
-  background: linear-gradient(to bottom right, #f0f4f8, #d9e2ec);
 }
 
 .signin-container {

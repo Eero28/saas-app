@@ -1,40 +1,42 @@
-"use client"
-import { useState } from "react"
-import "../../styling/signin.css"
+"use client";
+
+import { useState } from "react";
+import "../../styling/signin.css";
 import { createClient } from "@/lib/client";
 import { useRouter } from "next/navigation";
 
-export default function SigninPage() {
+const SigninPage = () => {
     const [isSignUp, setIsSignUp] = useState<boolean>(false);
-    const [password, setPassword] = useState<string>("")
-    const [email, setEmail] = useState<string>("")
-    const [message, setMessage] = useState<string>("")
-    const supabase = createClient()
+    const [password, setPassword] = useState<string>("");
+    const [email, setEmail] = useState<string>("");
+    const [message, setMessage] = useState<string>("");
+    const supabase = createClient();
 
-    const router = useRouter()
+    const router = useRouter();
 
     const handleAuth = async (event: React.FormEvent) => {
-        event.preventDefault()
+        event.preventDefault();
+        setMessage("");
         try {
             if (isSignUp) {
-                const { error } = await supabase.auth.signUp({ email, password })
+                const { error } = await supabase.auth.signUp({ email, password });
 
-                if (error) {
-                    throw error
-                }
-                setMessage("Check your email for confirmation link!")
+                if (error) throw error;
+
+                setMessage("Check your email for confirmation link!");
             } else {
-                const { error } = await supabase.auth.signInWithPassword({ email, password })
+                const { error } = await supabase.auth.signInWithPassword({ email, password });
 
-                if (error) {
-                    throw error
-                }
-                router.push("/dashboard")
+                if (error) throw error;
+
+                router.push("/dashboard");
             }
-        } catch (e) {
-            console.log(e)
+        } catch (e: any) {
+            console.error(e);
+            setMessage(e.message || "Something went wrong.");
         }
-    }
+    };
+
     return (
         <div className="signin-container">
             <div className="form-wrapper">
@@ -47,12 +49,27 @@ export default function SigninPage() {
                 <form onSubmit={handleAuth}>
                     <div className="form-group">
                         <label>Email</label>
-                        <input value={email} onChange={(e) => setEmail(e.target.value)} id="email" name="email" type="email" required />
+                        <input
+                            autoFocus
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            id="email"
+                            name="email"
+                            type="email"
+                            required
+                        />
                     </div>
 
                     <div className="form-group">
                         <label>Password</label>
-                        <input value={password} onChange={(e) => setPassword(e.target.value)} id="password" name="password" type="password" required />
+                        <input
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            id="password"
+                            name="password"
+                            type="password"
+                            required
+                        />
                     </div>
 
                     <div className="form-group">
@@ -76,4 +93,6 @@ export default function SigninPage() {
             </div>
         </div>
     );
-}
+};
+
+export default SigninPage;
