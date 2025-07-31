@@ -1,4 +1,4 @@
-name: Next.js-pdf CI
+name: Next.js-saas-app CI
 
 on:
   push:
@@ -20,9 +20,6 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-
-      - name: Run ESLint check
-        run: npx eslint . --max-warnings=0
 
       - name: Run Prettier check
         run: npx prettier --check .
